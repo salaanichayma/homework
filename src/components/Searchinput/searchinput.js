@@ -1,56 +1,57 @@
-// Import React and useState hook
-import React, { useState } from 'react';
-import './searchinput.css'; // Import your custom CSS file
 
-// Create a functional component
-function SearchBarWithDropdown() {
- // State to manage input value
- const [searchTerm, setSearchTerm] = useState('');
 
- // State to manage drop-down visibility
- const [showDropdown, setShowDropdown] = useState(false);
+import React, { useState, useMemo } from 'react';
 
- // Dummy data for the drop-down options
- const dropdownOptions = ['Option 1', 'Option 2', 'Option 3'];
+import './searchinput.css';
 
- // Function to handle input change
- const handleInputChange = (event) => {
-   const value = event.target.value;
-   setSearchTerm(value);
+function SearchBarWithDropdown({
+  placeholder,
+  onChange,
+  options,
+  isLoading,
+}) {
 
-   // Show the drop-down when there is input
-   setShowDropdown(value.length > 0);
- };
+  
+  const [searchTerm, setSearchTerm] = useState('');
+  const [showDropdown, setShowDropdown] = useState(false);
 
- // Function to handle option selection
- const handleOptionClick = (option) => {
-   setSearchTerm(option);
-   setShowDropdown(false); // Hide the drop-down after selecting an option
- };
+  const handleInputChange = (event) => {
+    const value = event.target.value;
+    setSearchTerm(value);
+    setShowDropdown(value.length > 0);
+    onChange(value); 
+  };
+
+  const handleOptionClick = (option) => {
+    setSearchTerm(option);
+    setShowDropdown(false);
+  };
+
+  const filteredOptions = useMemo(() => {
+    return options.filter((option) =>
+      option.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [options, searchTerm]);
 
   return (
     <div className="search-bar-container">
-      {/* Search input */}
       <input
         type="text"
         value={searchTerm}
         onChange={handleInputChange}
-        placeholder="Start (stop, address, POI)"
+        placeholder={placeholder}
         className="search-input"
       />
 
-      {/* Drop-down */}
-      {showDropdown && (
-        <ul className="dropdown-list">
-          {dropdownOptions
-            .filter((option) => option.toLowerCase().includes(searchTerm.toLowerCase()))
-            .map((option, index) => (
-              <li key={index} onClick={() => handleOptionClick(option)}>
-                {option}
-              </li>
-            ))}
-        </ul>
-      )}
+{showDropdown && (
+  <ul className="dropdown-list">
+    {filteredOptions.map((option, index) => (
+      <li key={index} onClick={() => handleOptionClick(option.name)}>
+        {option.name}
+      </li>
+    ))}
+  </ul>
+)}
     </div>
   );
 }

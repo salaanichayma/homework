@@ -7,7 +7,7 @@ import Footer from '../components/Footer/footer';
 import './firstpage.css';
 
 
-import LocationComponent from '../components/Searchinput/MapForm';
+import LocationComponent from '../components/Form/MapForm';
 
 const DataPage = () => {
   return (

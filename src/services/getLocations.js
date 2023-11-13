@@ -18,7 +18,7 @@ const getLocations = async (name) => {
         name_sf: name,
       },
     });
-    return response.data; 
+    return response.data.locations; 
   } catch (error) {
     throw error;
   }

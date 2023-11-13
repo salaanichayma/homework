@@ -7,7 +7,7 @@ function App() {
   return (
     <Router>
        <Switch>
-          <Route path="/data" component={DataPage} />
+          <Route path="/" component={DataPage} />
         </Switch>
      
     </Router>

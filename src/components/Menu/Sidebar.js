@@ -22,7 +22,7 @@ const Sidebar = () => {
             <span className="Menu-title">Home</span>
           </Link>
         </li>
-        <li className={`Menu-item ${isActive('/data') ? 'active-link' : ''}`}>
+        <li className={`Menu-item ${isActive('/') ? 'active-link' : ''}`}>
           <Link to="/data">
             <FontAwesomeIcon icon={faMap} size='sm' className="Menu-icon" />
             <span className="Menu-title">Ticketing with journey planner</span>
