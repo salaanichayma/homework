@@ -1,16 +1,25 @@
 // MapDisplay.js
-import React from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import './map.css';
+import React from 'react'
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import './map.css'
+import 'leaflet/dist/leaflet.css'
 
 const MapDisplay = ({ startPosition, endPosition }) => {
   return (
     <div className="map-container">
-      <MapContainer center={[0, 0]} zoom={2} className="leaflet-container">
+      <MapContainer
+        center={[51.505, -0.09]}
+        zoom={13}
+        className="leaflet-container"
+      >
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
         {/* ... (same map elements as before) */}
       </MapContainer>
     </div>
-  );
-};
+  )
+}
 
-export default MapDisplay;
+export default MapDisplay

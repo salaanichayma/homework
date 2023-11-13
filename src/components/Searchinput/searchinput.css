@@ -36,3 +36,13 @@
 .dropdown-list li:hover {
   background-color: #f0f0f0;
 }
+
+.clear-button {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
