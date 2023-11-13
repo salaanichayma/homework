@@ -1,0 +1,46 @@
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f8f8; 
+}
+
+.container {
+  display: flex;
+  min-height: 100vh; 
+}
+
+.content {
+  margin-top: 25px;
+  margin-bottom: 25px;
+  display: flex;
+  flex-wrap: wrap; 
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.left-side,
+.right-side {
+  flex: 1;
+  box-sizing: border-box;
+  padding: 20px;
+  border: 1px solid gainsboro;
+  margin: 20px;
+}
+
+.left-side,
+.right-side {
+  max-width: calc(50% - 30px);
+}
+
+
+@media only screen and (max-width: 768px) {
+  .content {
+    flex-direction: column; 
+  }
+
+  .left-side,
+  .right-side {
+    max-width: 100%; 
+    margin: 10px; 
+  }
+}
