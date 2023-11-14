@@ -6,7 +6,7 @@ import debouce from "lodash.debounce";
 
 
 
-const SearchBarWithDropdown = ({ placeholder, onChange, options, isLoading, required }) => {
+const SearchBarWithDropdown = ({ placeholder, onChange, options, isLoading, required, onSelect  }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [showDropdown, setShowDropdown] = useState(false);
   const inputRef = useRef(null);
@@ -24,11 +24,13 @@ const SearchBarWithDropdown = ({ placeholder, onChange, options, isLoading, requ
   };
 
   const handleOptionClick = (option) => {
+   
    if (inputRef.current) {
-    inputRef.current.value = option;
+    inputRef.current.value = option.name;
   }
-    setSelectedOption(option);
+    setSelectedOption(option.name);
     setShowDropdown(false);
+    onSelect(option)
   };
 
 
@@ -49,6 +51,7 @@ const SearchBarWithDropdown = ({ placeholder, onChange, options, isLoading, requ
     }
     setSearchTerm('');
     setShowDropdown(false);
+    setSelectedOption('')
   };
 
   const handleClearButtonClick = (event) => {
@@ -82,7 +85,7 @@ const SearchBarWithDropdown = ({ placeholder, onChange, options, isLoading, requ
         <ul className="dropdown-list">
           {options.map((option, index) => (
             <li key={index} 
-              onClick={() => handleOptionClick(option.name)}
+              onClick={() => handleOptionClick(option)}
               className={selectedOption === option.name ? 'selected-option' : ''}
               >
               {option.name}
