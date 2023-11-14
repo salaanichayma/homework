@@ -52,6 +52,7 @@ const SearchBarWithDropdown = ({ placeholder, onChange, options, isLoading, requ
     setSearchTerm('');
     setShowDropdown(false);
     setSelectedOption('')
+    onSelect('')
   };
 
   const handleClearButtonClick = (event) => {
