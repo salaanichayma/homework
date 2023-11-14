@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Header from '../components/Header/header'
 import Sidebar from '../components/Menu/Sidebar'
 import Footer from '../components/Footer/footer'
@@ -9,6 +9,8 @@ import LocationComponent from '../components/Form/MapForm'
 import MapDisplay from '../components/Map/map'
 
 const DataPage = () => {
+  const [coordinates, setCoordinates] = useState(null);
+
   return (
     <>
       <Header />
@@ -18,10 +20,10 @@ const DataPage = () => {
         </div>
         <div className="content">
           <div className="left-side">
-            <LocationComponent />
+            <LocationComponent  setCoordinates={setCoordinates}/>
           </div>
           <div className="right-side">
-            <MapDisplay />
+            <MapDisplay  coordinates={coordinates} />
           </div>
         </div>
       </div>
