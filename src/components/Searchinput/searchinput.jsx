@@ -11,7 +11,7 @@ const SearchBarWithDropdown = ({ placeholder, onChange, options, isLoading, requ
   const [showDropdown, setShowDropdown] = useState(false);
   const inputRef = useRef(null);
   const [isFilled, setIsFilled] = useState(null);
- 
+  const [selectedOption, setSelectedOption] = useState(null);
 
 
   const handleInputChange = (event) => {
@@ -27,6 +27,7 @@ const SearchBarWithDropdown = ({ placeholder, onChange, options, isLoading, requ
    if (inputRef.current) {
     inputRef.current.value = option;
   }
+    setSelectedOption(option);
     setShowDropdown(false);
   };
 
@@ -60,6 +61,8 @@ const SearchBarWithDropdown = ({ placeholder, onChange, options, isLoading, requ
   };
 
 
+  
+
  
   return (
     <div className="search-bar-container">
@@ -78,7 +81,10 @@ const SearchBarWithDropdown = ({ placeholder, onChange, options, isLoading, requ
       {options.length >0 && showDropdown && (
         <ul className="dropdown-list">
           {options.map((option, index) => (
-            <li key={index} onClick={() => handleOptionClick(option.name)}>
+            <li key={index} 
+              onClick={() => handleOptionClick(option.name)}
+              className={selectedOption === option.name ? 'selected-option' : ''}
+              >
               {option.name}
             </li>
           ))}

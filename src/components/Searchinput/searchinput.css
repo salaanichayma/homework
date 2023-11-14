@@ -63,12 +63,17 @@
  
 }
 
-.dropdown-list li:hover {
+.selected-option  {
   background-color: #dbdada;
   border-radius: 5px;
 }
+.dropdown-list li:hover {
+  background-color: #dbdada;
+  border-radius: 5px;
+  
+}
 .clear-button {
-  size: 10px;
+  size: 8px;
   cursor: pointer;
   color: #ccc; 
   position: absolute;
