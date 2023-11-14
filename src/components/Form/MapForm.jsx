@@ -36,6 +36,7 @@ const LocationComponent = () => {
         options={startData}
         onChange={handleStartInputChange}
         isLoading={isLoading}
+        required={true}
         
       />
      

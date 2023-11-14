@@ -6,11 +6,11 @@ import debouce from "lodash.debounce";
 
 
 
-const SearchBarWithDropdown = ({ placeholder, onChange, options, isLoading }) => {
+const SearchBarWithDropdown = ({ placeholder, onChange, options, isLoading, required }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [showDropdown, setShowDropdown] = useState(false);
   const inputRef = useRef(null);
-
+  const [isFilled, setIsFilled] = useState(null);
  
 
 
@@ -19,7 +19,7 @@ const SearchBarWithDropdown = ({ placeholder, onChange, options, isLoading }) =>
     setSearchTerm(value);
     setShowDropdown(!!value);
     onChange(value)
-   
+    setIsFilled(!!value); 
    
   };
 
@@ -30,11 +30,6 @@ const SearchBarWithDropdown = ({ placeholder, onChange, options, isLoading }) =>
     setShowDropdown(false);
   };
 
-  const filteredOptions = useMemo(() => {
-    return options.filter((option) =>
-      option.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-  }, [options, searchTerm]); 
 
   const debouncedResults = useMemo(() => {
     
@@ -60,6 +55,12 @@ const SearchBarWithDropdown = ({ placeholder, onChange, options, isLoading }) =>
     reset();
   };
 
+  const handleFocus = () => {
+    setShowDropdown(true)
+  };
+
+
+ 
   return (
     <div className="search-bar-container">
       <input
@@ -67,15 +68,16 @@ const SearchBarWithDropdown = ({ placeholder, onChange, options, isLoading }) =>
         type="text"
         onChange={debouncedResults}
         placeholder={placeholder}
-        className="search-input"
+        className={`search-input ${required && isFilled === false ? 'not-filled-border' : ''}`}
+        onFocus={handleFocus}
       />
       {searchTerm && (
         <FontAwesomeIcon icon={faCircleXmark} className="clear-button"  onClick={handleClearButtonClick} />
       )}
 
-      {options.length > 0 && showDropdown && (
+      {options.length >0 && showDropdown && (
         <ul className="dropdown-list">
-          {filteredOptions.map((option, index) => (
+          {options.map((option, index) => (
             <li key={index} onClick={() => handleOptionClick(option.name)}>
               {option.name}
             </li>

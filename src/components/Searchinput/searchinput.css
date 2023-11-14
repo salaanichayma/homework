@@ -17,6 +17,9 @@
 .search-input:focus {
   border: 1px solid #2196F3;
 }
+.search-input.not-filled-border {
+  border: 1px solid red; 
+}
 
 .search-input::placeholder {
   color: #ccc;
@@ -43,6 +46,7 @@
   line-height: 28px;
   cursor: pointer;
 }
+
 
 
 .dropdown-list::-webkit-scrollbar {
